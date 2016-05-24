@@ -40,20 +40,28 @@ $app->get('/topics', function($request, $response, $args) {
 });
 
 //INPROGRESS
-/*$app->post('/topics', function($request, $response, $args) {
-  $sql = "INSERT INTO Sujet (`title`) VALUES ('GoT Spoliers');";
+$app->post('/topics', function($request, $response, $args) {
+  $body = $request->getParsedBody();
+  $sql = "SELECT * FROM Sujet WHERE titre = '".$body["title"]."';";
   $query = $this->db->query($sql);
   $result = $query->fetchAll();
-  return $response->withJson($result);
-});*/
+  if (count($result) == 0) {
+     $sql = "INSERT INTO Sujet (`titre`) VALUES ('".$body["title"]."');";
+     $query = $this->db->query($sql);
+  } else {
+    return "existe déjà";
+  }
+ 
+  return "ok";
+});
 
-//INPROGRESS
-/*$app->put('/topics', function($request, $response, $args) {
-  $sql = "DELETE FROM Sujet WHERE id = ".$args["id"];
-  $query = $this->db->query($sql);
-  $result = $query->fetchAll();
-  return $response->withJson($result);
-});*/
+
+// $app->update('/topics', function($request, $response, $args) {
+//   $sql = "DELETE FROM Sujet WHERE id = ".$args["id"];
+//   $query = $this->db->query($sql);
+//   $result = $query->fetchAll();
+//   return $response->withJson($result);
+// });
 
 //TODO
 /*$app->delete('/topics', function($request, $response, $args) {
@@ -61,14 +69,14 @@ $app->get('/topics', function($request, $response, $args) {
   $query = $this->db->query($sql);
   $result = $query->fetchAll();
   return $response->withJson($result);
-});*/
+});
 
 $app->get('/tag/{id}/posts', function($request, $response, $args) {
-  $sql = "SELECT * FROM Post INNER JOIN Tagge ON Tagge.idPost = Post.id WHERE Tagge.idTag = ".$args["id"].";";
+  $sql = "SELECT * FROM Post INNER JOIN TAGGE ON id_tag =".$args["id"].";";
   $query = $this->db->query($sql);
   $result = $query->fetchAll();
   return $response->withJson($result);
-});
+});*/
 
 //topic/id
 
@@ -79,15 +87,3 @@ $app->get('/post/{id}/tags', function($request, $response, $args) {
   return $response->withJson($result);
 });
 
-
-
-// $app->get('/jsonTestRoute', function($request, $response, $args) {
-//   $array = [ "key" => "value" ];
-//   return $response->withJson($array);
-// });
-
-
-// $app->get('/jsonTestRoute', function($request, $response, $args) {
-//   $array = [ "key" => "value" ];
-//   return $response->withJson($array);
-// });
