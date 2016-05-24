@@ -8,7 +8,7 @@ SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 DROP TABLE IF EXISTS `COMMENTS`;
 CREATE TABLE `COMMENTS` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `text` text COLLATE utf8_bin NOT NULL,
+  `content` text COLLATE utf8_bin NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `author` varchar(255) COLLATE utf8_bin NOT NULL,
   `id_answer` int(10) unsigned DEFAULT NULL,
@@ -20,7 +20,7 @@ CREATE TABLE `COMMENTS` (
   CONSTRAINT `COMMENTS_ibfk_2` FOREIGN KEY (`id_answer`) REFERENCES `COMMENTS` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-INSERT INTO `COMMENTS` (`id`, `text`, `date`, `author`, `id_answer`, `id_post`) VALUES
+INSERT INTO `COMMENTS` (`id`, `content`, `date`, `author`, `id_answer`, `id_post`) VALUES
 (1,	'Les barbies c\'est trop génial! On peut les démembrer !!!!!! :D',	'2016-05-23 13:28:36',	'le_nainfant',	NULL,	2),
 (2,	'Moi, je préfère les décapitations!',	'2016-05-23 13:29:55',	'Grrrrr_leVieux',	1,	2),
 (3,	'J\'ai jamais aimé barbie elle pue !!! lol',	'2016-05-23 13:32:03',	'tonPere',	NULL,	2),
@@ -30,7 +30,7 @@ DROP TABLE IF EXISTS `POSTS`;
 CREATE TABLE `POSTS` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(255) COLLATE utf8_bin NOT NULL,
-  `text` text COLLATE utf8_bin NOT NULL,
+  `content` text COLLATE utf8_bin NOT NULL,
   `image` varchar(255) COLLATE utf8_bin NOT NULL,
   `date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `id_subject` int(10) unsigned NOT NULL,
@@ -40,7 +40,7 @@ CREATE TABLE `POSTS` (
   CONSTRAINT `POSTS_ibfk_1` FOREIGN KEY (`id_subject`) REFERENCES `SUBJECT` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-INSERT INTO `POSTS` (`id`, `title`, `text`, `image`, `date`, `id_subject`, `author`) VALUES
+INSERT INTO `POSTS` (`id`, `title`, `content`, `image`, `date`, `id_subject`, `author`) VALUES
 (1,	'Episode 5, Season 5',	'Jon Snow dies.',	'http://www.thewrap.com/wp-content/uploads/2016/04/hbo-game-of-thrones-jon-snow.jpeg',	'2016-05-23 13:22:48',	1,	'VanessaTaMere'),
 (2,	'Barbie Girl Power',	'bla blaaaaaaaaaaaaa blaaa unicorn',	'https://s3-eu-west-1.amazonaws.com/spiked-online.com/images/barbie.jpg',	'0000-00-00 00:00:00',	2,	'theBestSinger');
 
@@ -83,4 +83,4 @@ INSERT INTO `TAGGE` (`id_post`, `id_tag`) VALUES
 (1,	1),
 (1,	2);
 
--- 2016-05-23 13:41:16
+-- 2016-05-23 14:38:52
