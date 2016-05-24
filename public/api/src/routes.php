@@ -1,16 +1,6 @@
 <?php
 // Routes
 
-
-// EXAMPLE
-// $app->get('/[{name}]', function ($request, $response, $args) {
-//     // Sample log message
-//     $this->logger->info("Slim-Skeleton '/' route");
-
-//     // Render index view
-//     return $this->renderer->render($response, 'index.phtml', $args);
-// });
-
 $app->get('/topic/{id}/posts', function($request, $response, $args) {
   $sql = "SELECT * FROM Post WHERE sujet =".$args["id"].";";
   $query = $this->db->query($sql);
@@ -20,17 +10,17 @@ $app->get('/topic/{id}/posts', function($request, $response, $args) {
 
 $app->post('/topic/{id}/posts', function($request, $response, $args) {
    try{
-    $body  = $request->getParsedBody();
-    $titre = filter_var($body['titre'], FILTER_SANITIZE_STRING);
+    $body   = $request->getParsedBody();
+    $titre  = filter_var($body['titre'], FILTER_SANITIZE_STRING);
     $auteur = filter_var($body['auteur'], FILTER_SANITIZE_STRING);
-    $image = filter_var($body['image'], FILTER_SANITIZE_STRING);
-    $texte = filter_var($body['contenu'], FILTER_SANITIZE_STRING);
+    $image  = filter_var($body['image'], FILTER_SANITIZE_STRING);
+    $texte  = filter_var($body['contenu'], FILTER_SANITIZE_STRING);
 
     if (empty($image)){
       $sql = "INSERT INTO Post (`titre`, `auteur`, `image`, `texte`, `sujet`) VALUES ('".$titre."', '".$auteur."', 'NULL', '".$texte."', '".$args["id"]."');";
     } else {
       $sql = "INSERT INTO Post (`titre`, `auteur`, `image`, `texte`, `sujet`) VALUES ('".$titre."', '".$auteur."', '".$image."', '".$texte."', '".$args["id"]."');";
-    }    
+    }
     $query = $this->db->query($sql);
 
     $response->status = 200;
@@ -40,13 +30,11 @@ $app->post('/topic/{id}/posts', function($request, $response, $args) {
   return $response->withJson(http_response_code());
 });
 
-
-
 $app->get('/post/{ids}/comments', function($request, $response, $args) {
   $id_array = explode(",", $args["ids"]);
   $sql = "SELECT * FROM Comments WHERE ";
   for ($i = 0; $i < count($id_array)-1; $i++) {
-  	$sql .= "id = ".$id_array[$i]." OR ";
+    $sql .= "id = ".$id_array[$i]." OR ";
   }
   $sql .= "id = ".$id_array[$i].";";
   $query = $this->db->query($sql);
@@ -84,8 +72,9 @@ $app->delete('/post/{id}', function($request, $response, $args) {
     $sql = "DELETE FROM Post WHERE id = ".$args["id"];
     $query = $this->db->query($sql);
     $response->status = 200;
+  } else {
+    $response->status = 400;
   }
-  $response->status = 400;
   return $response->withJson(http_response_code());
 });
 
@@ -121,29 +110,37 @@ $app->post('/topics', function($request, $response, $args) {
 });
 
 $app->put('/topic/{id}', function($request, $response, $args) {
-  $body = $request->getParsedBody();
-  $sql = "SELECT * FROM Sujet WHERE id = '".$args["id"]."';";
-  $query = $this->db->query($sql);
-  $result = $query->fetchAll();
-  if (count($result) == 1) {
-      $sql = "UPDATE Sujet SET titre ='".$body["title"]."' WHERE id=".$args['id'].";";
-      $query = $this->db->query($sql);
-      return "updated :poop:";
+  try {
+    $body = $request->getParsedBody();
+    $sql = "SELECT * FROM Sujet WHERE id = '".$args["id"]."';";
+    $query = $this->db->query($sql);
+    $result = $query->fetchAll();
+    if (count($result) == 1) {
+        $sql = "UPDATE Sujet SET titre ='".$body["titre"]."' WHERE id=".$args['id'].";";
+        $query = $this->db->query($sql);
+    }
+    $response->status = 200;
+  } catch(Exception $e) {
+    $response->status = 400;
   }
-  return "echec";
+  return $response->withJson(http_response_code());
 });
 
 $app->delete('/topic/{id}', function($request, $response, $args) {
-  $sql = "SELECT * FROM Sujet WHERE id = ".$args["id"];
-  $query = $this->db->query($sql);
-  $result = $query->fetchAll();
-  if (count($result) == 1) {
-    $sql = "DELETE FROM Sujet WHERE id = ".$args["id"];
+  try{
+    $sql = "SELECT * FROM Sujet WHERE id = ".$args["id"];
     $query = $this->db->query($sql);
-    return "deleted";
+    $result = $query->fetchAll();
+    if (count($result) == 1) {
+      $sql = "DELETE FROM Sujet WHERE id = ".$args["id"];
+      $query = $this->db->query($sql);
+    }
+    $response->status = 200;
+  } catch(Exception $e) {
+    $response->status = 400;
   }
-  return "beurk";
-}); 
+  return $response->withJson(http_response_code());
+});
 
 
 $app->get('/tag/{id}/posts', function($request, $response, $args) {
@@ -165,41 +162,44 @@ $app->get('/post/{id}/tags', function($request, $response, $args) {
 
 // ajoute des tags sur un post
 $app->post('/post/{id}/tags', function($request, $response, $args) {
-  $body  = $request->getParsedBody();
-  $tags = filter_var($body['nomTag'], FILTER_SANITIZE_STRING);
+  try{
+    $body  = $request->getParsedBody();
+    $tags = filter_var($body['nomTag'], FILTER_SANITIZE_STRING);
 
-  $sql = "SELECT * FROM Post WHERE id = ".$args["id"];
-  $query = $this->db->query($sql);
-  $result = $query->fetchAll();
- 
-  if (count($result) == 0) { return "Le post n'existe pas";  }
-
-  $tabTags = explode(",", $tags);
-  
-  foreach($tabTags as $tagCourant){
-    $sql = "SELECT id FROM Tag WHERE nom = '".$tagCourant."';";
+    $sql = "SELECT * FROM Post WHERE id = ".$args["id"];
     $query = $this->db->query($sql);
     $result = $query->fetchAll();
-    if (count($result) == 0) {
-       $sql = "INSERT INTO Tag (`nom`) VALUES ('".$tagCourant."');";
-       $query = $this->db->query($sql);
-       $reponse = $this->db->lastInsertId();
-    } else {
-      $reponse = $result[0]['id'];
-    }
 
-    $sql = "SELECT * FROM Tagge WHERE idPost = ".$args["id"]." && idTag = ".$reponse;
-    $query = $this->db->query($sql);
-    $result = $query->fetchAll();
-   
-    if (count($result) == 0) {
-       $sql = "INSERT INTO Tagge VALUES ('".$args["id"]."','".$reponse."');";
-       $query = $this->db->query($sql);
+    if (count($result) == 0) { return "Le post n'existe pas";  }
+
+    $tabTags = explode(",", $tags);
+
+    foreach($tabTags as $tagCourant){
+      $sql = "SELECT id FROM Tag WHERE nom = '".$tagCourant."';";
+      $query = $this->db->query($sql);
+      $result = $query->fetchAll();
+      if (count($result) == 0) {
+         $sql = "INSERT INTO Tag (`nom`) VALUES ('".$tagCourant."');";
+         $query = $this->db->query($sql);
+         $reponse = $this->db->lastInsertId();
+      } else {
+        $reponse = $result[0]['id'];
+      }
+
+      $sql = "SELECT * FROM Tagge WHERE idPost = ".$args["id"]." && idTag = ".$reponse;
+      $query = $this->db->query($sql);
+      $result = $query->fetchAll();
+
+      if (count($result) == 0) {
+         $sql = "INSERT INTO Tagge VALUES ('".$args["id"]."','".$reponse."');";
+         $query = $this->db->query($sql);
+      }
+      $response->status = 200;
     }
-      
+  } catch(Exception $e) {
+    $response->status = 200;
   }
-  return 'mega cool';
-
+  return $response->withJson(http_response_code());
 });
 
 // Supprime les tags d'un post
@@ -209,7 +209,7 @@ $app->post('/post/{id}/tags', function($request, $response, $args) {
   $sql = "SELECT * FROM Post WHERE id = ".$args["id"];
   $query = $this->db->query($sql);
   $result = $query->fetchAll();
- 
+
   if (count($result) == 0) { return "Le post n'existe pas";  }
 
   $tags = filter_var($body['toDeleteTag'], FILTER_SANITIZE_STRING);
