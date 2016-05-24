@@ -12,7 +12,7 @@
 // });
 
 $app->get('/topic/{id}/posts', function($request, $response, $args) {
-  $sql = "SELECT * FROM Post WHERE id_subject =".$args["id"].";";
+  $sql = "SELECT * FROM Post WHERE sujet =".$args["id"].";";
   $query = $this->db->query($sql);
   $result = $query->fetchAll();
   return $response->withJson($result);
@@ -22,9 +22,9 @@ $app->get('/post/{ids}/comments', function($request, $response, $args) {
   $id_array = explode(",", $args["ids"]);
   $sql = "SELECT * FROM Comments WHERE ";
   for ($i = 0; $i < count($id_array)-1; $i++) {
-  	$sql .= "id_post = ".$id_array[$i]." OR ";
+  	$sql .= "id = ".$id_array[$i]." OR ";
   }
-  $sql .= "id_post = ".$id_array[$i].";";
+  $sql .= "id = ".$id_array[$i].";";
   $query = $this->db->query($sql);
   $result = $query->fetchAll();
   return $response->withJson($result);
@@ -40,23 +40,23 @@ $app->get('/topics', function($request, $response, $args) {
 });
 
 //INPROGRESS
-$app->post('/topics', function($request, $response, $args) {
+/*$app->post('/topics', function($request, $response, $args) {
   $sql = "INSERT INTO Sujet (`title`) VALUES ('GoT Spoliers');";
   $query = $this->db->query($sql);
   $result = $query->fetchAll();
   return $response->withJson($result);
-});
+});*/
 
 //INPROGRESS
-$app->update('/topics', function($request, $response, $args) {
+/*$app->update('/topics', function($request, $response, $args) {
   $sql = "DELETE FROM Sujet WHERE id = ".$args["id"];
   $query = $this->db->query($sql);
   $result = $query->fetchAll();
   return $response->withJson($result);
-});
+});*/
 
 //TODO
-$app->delete('/topics', function($request, $response, $args) {
+/*$app->delete('/topics', function($request, $response, $args) {
   $sql = "SELECT * FROM Sujet;";
   $query = $this->db->query($sql);
   $result = $query->fetchAll();
@@ -68,12 +68,12 @@ $app->get('/tag/{id}/posts', function($request, $response, $args) {
   $query = $this->db->query($sql);
   $result = $query->fetchAll();
   return $response->withJson($result);
-});
+});*/
 
 //topic/id
 
 $app->get('/post/{id}/tags', function($request, $response, $args) {
-  $sql = "SELECT * FROM Tag WHERE id_post = ".$args["id"].";";
+  $sql = "SELECT * FROM Tag INNER JOIN Tagge ON Tagge.idTag = Tag.id WHERE Tagge.idPost = ".$args["id"].";";
   $query = $this->db->query($sql);
   $result = $query->fetchAll();
   return $response->withJson($result);
