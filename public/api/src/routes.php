@@ -54,8 +54,23 @@ $app->get('/post/{ids}/comments', function($request, $response, $args) {
   return $response->withJson($result);
 });
 
+
 $app->get('/post/{id}', function($request, $response, $args) {
   $sql = "SELECT * FROM Post WHERE id = ".$args["id"].";";
+  $query = $this->db->query($sql);
+  $result = $query->fetchAll();
+  return $response->withJson($result);
+});
+
+$app->get('/posts', function($request, $response, $args) {
+  $sql = "SELECT * FROM Post";
+  $query = $this->db->query($sql);
+  $result = $query->fetchAll();
+  return $response->withJson($result);
+});
+
+$app->get('/comments', function($request, $response, $args) {
+  $sql = "SELECT * FROM Comments";
   $query = $this->db->query($sql);
   $result = $query->fetchAll();
   return $response->withJson($result);
@@ -74,12 +89,16 @@ $app->delete('/post/{id}', function($request, $response, $args) {
   return $response->withJson(http_response_code());
 });
 
+
+
 $app->get('/topics', function($request, $response, $args) {
   $sql = "SELECT * FROM Sujet;";
   $query = $this->db->query($sql);
   $result = $query->fetchAll();
   return $response->withJson($result);
 });
+
+
 
 $app->post('/topics', function($request, $response, $args) {
   try{
