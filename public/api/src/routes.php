@@ -39,38 +39,49 @@ $app->get('/topics', function($request, $response, $args) {
   return $response->withJson($result);
 });
 
-//INPROGRESS
 $app->post('/topics', function($request, $response, $args) {
-  $body = $request->getParsedBody();
-  $sql = "SELECT * FROM Sujet WHERE titre = '".$body["title"]."';";
-  $query = $this->db->query($sql);
-  $result = $query->fetchAll();
-  if (count($result) == 0) {
-     $sql = "INSERT INTO Sujet (`titre`) VALUES ('".$body["title"]."');";
-     $query = $this->db->query($sql);
-  } else {
-    return "existe déjà";
+  try{
+    $body  = $request->getParsedBody();
+    $titre = filter_var($body['titre'], FILTER_SANITIZE_STRING);
+    $sql = "SELECT * FROM Sujet WHERE titre = '".$titre."';";
+    $query = $this->db->query($sql);
+    $result = $query->fetchAll();
+    if (count($result) == 0) {
+       $sql = "INSERT INTO Sujet (`titre`) VALUES ('".$titre."');";
+       $query = $this->db->query($sql);
+    } else {
+      return "existe déjà";
+    }
+    $response->status = 200;
+  } catch (Exception $e){
+    $response->status = 400;
   }
- 
-  return "ok";
+  return $response->withJson(http_response_code());
 });
 
+$app->put('/topic/{id}', function($request, $response, $args) {
+  $body = $request->getParsedBody();
+  $sql = "SELECT * FROM Sujet WHERE id = '".$args["id"]."';";
+  $query = $this->db->query($sql);
+  $result = $query->fetchAll();
+  if (count($result) == 1) {
+      $sql = "UPDATE Sujet SET titre ='".$body["title"]."' WHERE id=".$args['id'].";";
+      $query = $this->db->query($sql);
+      return "updated :poop:";
+  }
+  return "echec";
+});
 
-// $app->update('/topics', function($request, $response, $args) {
-//   $sql = "DELETE FROM Sujet WHERE id = ".$args["id"];
-//   $query = $this->db->query($sql);
-//   $result = $query->fetchAll();
-//   return $response->withJson($result);
-// });
-
-//TODO
-/*$app->delete('/topics', function($request, $response, $args) {
+$app->delete('/topics', function($request, $response, $args) {
+  $body = $request->getParsedBody();
   $sql = "SELECT * FROM Sujet;";
+  $sql = "DELETE FROM Sujet WHERE id = ".$args["id"];
   $query = $this->db->query($sql);
   $result = $query->fetchAll();
   return $response->withJson($result);
-});
+}); 
 
+/*
 $app->get('/tag/{id}/posts', function($request, $response, $args) {
   $sql = "SELECT * FROM Post INNER JOIN TAGGE ON id_tag =".$args["id"].";";
   $query = $this->db->query($sql);

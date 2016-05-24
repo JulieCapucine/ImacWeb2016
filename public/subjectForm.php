@@ -11,8 +11,9 @@
 			<input type="submit"/>
 		</form>
 
-		<form method="put" action="api/public/topic/2">
+		<form method="post" action="api/public/topic/2">
 			<label for="title">Titre</label>
+			<input type="hidden" name="_METHOD" value="PUT"/>
 			<input type="text" name="title" id="title"/>
 			<input type="submit"/>
 		</form>
