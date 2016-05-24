@@ -10,6 +10,12 @@
 			<input type="text" name="title" id="title"/>
 			<input type="submit"/>
 		</form>
+
+		<form method="put" action="api/public/topic/2">
+			<label for="title">Titre</label>
+			<input type="text" name="title" id="title"/>
+			<input type="submit"/>
+		</form>
 	</body>
 
 
