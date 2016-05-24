@@ -21,9 +21,9 @@ CREATE TABLE `COMMENTS` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 INSERT INTO `COMMENTS` (`id`, `content`, `date`, `author`, `id_answer`, `id_post`) VALUES
-(1,	'Les barbies c\'est trop génial! On peut les démembrer !!!!!! :D',	'2016-05-23 13:28:36',	'le_nainfant',	NULL,	2),
-(2,	'Moi, je préfère les décapitations!',	'2016-05-23 13:29:55',	'Grrrrr_leVieux',	1,	2),
-(3,	'J\'ai jamais aimé barbie elle pue !!! lol',	'2016-05-23 13:32:03',	'tonPere',	NULL,	2),
+(1,	'Les barbies c\'est trop genial! On peut les demembrer !!!!!! :D',	'2016-05-24 08:07:59',	'le_nainfant',	NULL,	2),
+(2,	'Moi, je prefere les decapitations!',	'2016-05-24 08:08:08',	'Grrrrr_leVieux',	1,	2),
+(3,	'J\'ai jamais aime barbie elle pue !!! lol',	'2016-05-24 08:08:14',	'tonPere',	NULL,	2),
 (4,	'Je savais paaaas :O\r\n#IKnowNothing',	'2016-05-23 13:33:02',	'JonSnow',	NULL,	1);
 
 DROP TABLE IF EXISTS `POSTS`;
@@ -83,4 +83,4 @@ INSERT INTO `TAGGE` (`id_post`, `id_tag`) VALUES
 (1,	1),
 (1,	2);
 
--- 2016-05-23 14:38:52
+-- 2016-05-24 08:09:36
