@@ -12,7 +12,7 @@
 // });
 
 $app->get('/topic/{id}/posts', function($request, $response, $args) {
-  $sql = "SELECT * FROM POSTS WHERE id_subject =".$args["id"].";";
+  $sql = "SELECT * FROM Post WHERE id_subject =".$args["id"].";";
   $query = $this->db->query($sql);
   $result = $query->fetchAll();
   return $response->withJson($result);
@@ -20,7 +20,7 @@ $app->get('/topic/{id}/posts', function($request, $response, $args) {
 
 $app->get('/post/{ids}/comments', function($request, $response, $args) {
   $id_array = explode(",", $args["ids"]);
-  $sql = "SELECT * FROM COMMENTS WHERE ";
+  $sql = "SELECT * FROM Comments WHERE ";
   for ($i = 0; $i < count($id_array)-1; $i++) {
   	$sql .= "id_post = ".$id_array[$i]." OR ";
   }
@@ -30,22 +30,50 @@ $app->get('/post/{ids}/comments', function($request, $response, $args) {
   return $response->withJson($result);
 });
 
+//post/id recuperer post avec id
+
 $app->get('/topics', function($request, $response, $args) {
-  $sql = "SELECT * FROM SUBJECT;";
+  $sql = "SELECT * FROM Sujet;";
+  $query = $this->db->query($sql);
+  $result = $query->fetchAll();
+  return $response->withJson($result);
+});
+
+//INPROGRESS
+$app->post('/topics', function($request, $response, $args) {
+  $sql = "INSERT INTO Sujet (`title`) VALUES ('GoT Spoliers');";
+  $query = $this->db->query($sql);
+  $result = $query->fetchAll();
+  return $response->withJson($result);
+});
+
+//INPROGRESS
+$app->update('/topics', function($request, $response, $args) {
+  $sql = "DELETE FROM Sujet WHERE id = ".$args["id"];
+  $query = $this->db->query($sql);
+  $result = $query->fetchAll();
+  return $response->withJson($result);
+});
+
+//TODO
+$app->delete('/topics', function($request, $response, $args) {
+  $sql = "SELECT * FROM Sujet;";
   $query = $this->db->query($sql);
   $result = $query->fetchAll();
   return $response->withJson($result);
 });
 
 $app->get('/tag/{id}/posts', function($request, $response, $args) {
-  $sql = "SELECT * FROM POSTS INNER JOIN TAGGE ON id_tag =".$args["id"].";";
+  $sql = "SELECT * FROM Post INNER JOIN TAGGE ON id_tag =".$args["id"].";";
   $query = $this->db->query($sql);
   $result = $query->fetchAll();
   return $response->withJson($result);
 });
 
+//topic/id
+
 $app->get('/post/{id}/tags', function($request, $response, $args) {
-  $sql = "SELECT * FROM TAGS WHERE id_post = ".$args["id"].";";
+  $sql = "SELECT * FROM Tag WHERE id_post = ".$args["id"].";";
   $query = $this->db->query($sql);
   $result = $query->fetchAll();
   return $response->withJson($result);
