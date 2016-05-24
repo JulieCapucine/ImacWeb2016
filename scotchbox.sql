@@ -48,7 +48,8 @@ DROP TABLE IF EXISTS `SUBJECT`;
 CREATE TABLE `SUBJECT` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `title` (`title`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `SUBJECT` (`id`, `title`) VALUES
@@ -83,4 +84,4 @@ INSERT INTO `TAGGE` (`id_post`, `id_tag`) VALUES
 (1,	1),
 (1,	2);
 
--- 2016-05-24 08:20:12
+-- 2016-05-24 08:25:43
