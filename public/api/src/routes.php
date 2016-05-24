@@ -32,6 +32,14 @@ $app->get('/post/{ids}/comments', function($request, $response, $args) {
 
 //post/id recuperer post avec id
 
+$app->get('/post/{id}', function($request, $response, $args) {
+  $sql = "SELECT * FROM Post WHERE id = ".$args["id"].";";
+  $query = $this->db->query($sql);
+  $result = $query->fetchAll();
+  return $response->withJson($result);
+});
+
+
 $app->get('/topics', function($request, $response, $args) {
   $sql = "SELECT * FROM Sujet;";
   $query = $this->db->query($sql);
@@ -72,22 +80,25 @@ $app->put('/topic/{id}', function($request, $response, $args) {
   return "echec";
 });
 
-$app->delete('/topics', function($request, $response, $args) {
-  $body = $request->getParsedBody();
-  $sql = "SELECT * FROM Sujet;";
-  $sql = "DELETE FROM Sujet WHERE id = ".$args["id"];
+$app->delete('/topic/{id}', function($request, $response, $args) {
+  $sql = "SELECT * FROM Sujet WHERE id = ".$args["id"];
   $query = $this->db->query($sql);
   $result = $query->fetchAll();
-  return $response->withJson($result);
+  if (count($result) == 1) {
+    $sql = "DELETE FROM Sujet WHERE id = ".$args["id"];
+    $query = $this->db->query($sql);
+    return "deleted";
+  }
+  return "beurk";
 }); 
 
-/*
+
 $app->get('/tag/{id}/posts', function($request, $response, $args) {
-  $sql = "SELECT * FROM Post INNER JOIN TAGGE ON id_tag =".$args["id"].";";
+  $sql = "SELECT * FROM Post INNER JOIN Tagge ON Tagge.idTag = ".$args["id"]." WHERE Tagge.idPost = Post.id;";
   $query = $this->db->query($sql);
   $result = $query->fetchAll();
   return $response->withJson($result);
-});*/
+});
 
 //topic/id
 
