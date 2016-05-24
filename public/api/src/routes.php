@@ -155,10 +155,82 @@ $app->get('/tag/{id}/posts', function($request, $response, $args) {
 
 //topic/id
 
+// récupère tous les tags d'un post
 $app->get('/post/{id}/tags', function($request, $response, $args) {
   $sql = "SELECT * FROM Tag INNER JOIN Tagge ON Tagge.idTag = Tag.id WHERE Tagge.idPost = ".$args["id"].";";
   $query = $this->db->query($sql);
   $result = $query->fetchAll();
   return $response->withJson($result);
 });
+
+// ajoute des tags sur un post
+$app->post('/post/{id}/tags', function($request, $response, $args) {
+  $body  = $request->getParsedBody();
+  $tags = filter_var($body['nomTag'], FILTER_SANITIZE_STRING);
+
+  $sql = "SELECT * FROM Post WHERE id = ".$args["id"];
+  $query = $this->db->query($sql);
+  $result = $query->fetchAll();
+ 
+  if (count($result) == 0) { return "Le post n'existe pas";  }
+
+  $tabTags = explode(",", $tags);
+  
+  foreach($tabTags as $tagCourant){
+    $sql = "SELECT id FROM Tag WHERE nom = '".$tagCourant."';";
+    $query = $this->db->query($sql);
+    $result = $query->fetchAll();
+    if (count($result) == 0) {
+       $sql = "INSERT INTO Tag (`nom`) VALUES ('".$tagCourant."');";
+       $query = $this->db->query($sql);
+       $reponse = $this->db->lastInsertId();
+    } else {
+      $reponse = $result[0]['id'];
+    }
+
+    $sql = "SELECT * FROM Tagge WHERE idPost = ".$args["id"]." && idTag = ".$reponse;
+    $query = $this->db->query($sql);
+    $result = $query->fetchAll();
+   
+    if (count($result) == 0) {
+       $sql = "INSERT INTO Tagge VALUES ('".$args["id"]."','".$reponse."');";
+       $query = $this->db->query($sql);
+    }
+      
+  }
+  return 'mega cool';
+
+});
+
+// Supprime les tags d'un post
+/*$app->delete('/post/{id}/tags', function($request, $response, $args) {
+  $body = $request->getParsedBody();
+
+  $sql = "SELECT * FROM Post WHERE id = ".$args["id"];
+  $query = $this->db->query($sql);
+  $result = $query->fetchAll();
+ 
+  if (count($result) == 0) { return "Le post n'existe pas";  }
+
+  $tags = filter_var($body['toDeleteTag'], FILTER_SANITIZE_STRING);
+  $tabTags = explode(",", $tags);
+
+  foreach($tabTags as $tagCourant){
+    $sql = "SELECT * FROM Tagge WHERE idTag = '".$tagCourant."';";
+    $query = $this->db->query($sql);
+    $result = $query->fetchAll();
+    if (count($result) != 0) {
+       $reponse = $result[0]['id'];
+    }
+
+    $sql = "DELETE FROM Tagge WHERE idPost = ".$args["id"]." && idTag = ".$reponse;
+    $query = $this->db->query($sql);
+    $result = $query->fetchAll();
+
+  }
+
+
+
+  return 'yeah';*/
+}); 
 
