@@ -48,7 +48,7 @@ $app->get('/topics', function($request, $response, $args) {
 });*/
 
 //INPROGRESS
-/*$app->update('/topics', function($request, $response, $args) {
+/*$app->put('/topics', function($request, $response, $args) {
   $sql = "DELETE FROM Sujet WHERE id = ".$args["id"];
   $query = $this->db->query($sql);
   $result = $query->fetchAll();
@@ -61,14 +61,14 @@ $app->get('/topics', function($request, $response, $args) {
   $query = $this->db->query($sql);
   $result = $query->fetchAll();
   return $response->withJson($result);
-});
+});*/
 
 $app->get('/tag/{id}/posts', function($request, $response, $args) {
-  $sql = "SELECT * FROM Post INNER JOIN TAGGE ON id_tag =".$args["id"].";";
+  $sql = "SELECT * FROM Post INNER JOIN Tagge ON Tagge.idPost = Post.id WHERE Tagge.idTag = ".$args["id"].";";
   $query = $this->db->query($sql);
   $result = $query->fetchAll();
   return $response->withJson($result);
-});*/
+});
 
 //topic/id
 
