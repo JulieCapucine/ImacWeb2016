@@ -1,16 +1,6 @@
 <?php
 // Routes
 
-
-// EXAMPLE
-// $app->get('/[{name}]', function ($request, $response, $args) {
-//     // Sample log message
-//     $this->logger->info("Slim-Skeleton '/' route");
-
-//     // Render index view
-//     return $this->renderer->render($response, 'index.phtml', $args);
-// });
-
 $app->get('/topic/{id}/posts', function($request, $response, $args) {
   $sql = "SELECT * FROM Post WHERE sujet =".$args["id"].";";
   $query = $this->db->query($sql);
@@ -40,8 +30,6 @@ $app->post('/topic/{id}/posts', function($request, $response, $args) {
   return $response->withJson(http_response_code());
 });
 
-
-
 $app->get('/post/{ids}/comments', function($request, $response, $args) {
   $id_array = explode(",", $args["ids"]);
   $sql = "SELECT * FROM Comments WHERE ";
@@ -53,7 +41,6 @@ $app->get('/post/{ids}/comments', function($request, $response, $args) {
   $result = $query->fetchAll();
   return $response->withJson($result);
 });
-
 
 $app->get('/post/{id}', function($request, $response, $args) {
   $sql = "SELECT * FROM Post WHERE id = ".$args["id"].";";
@@ -89,16 +76,12 @@ $app->delete('/post/{id}', function($request, $response, $args) {
   return $response->withJson(http_response_code());
 });
 
-
-
 $app->get('/topics', function($request, $response, $args) {
   $sql = "SELECT * FROM Sujet;";
   $query = $this->db->query($sql);
   $result = $query->fetchAll();
   return $response->withJson($result);
 });
-
-
 
 $app->post('/topics', function($request, $response, $args) {
   try{
@@ -144,7 +127,6 @@ $app->delete('/topic/{id}', function($request, $response, $args) {
   }
   return "beurk";
 }); 
-
 
 $app->get('/tag/{id}/posts', function($request, $response, $args) {
   $sql = "SELECT * FROM Post INNER JOIN Tagge ON Tagge.idTag = ".$args["id"]." WHERE Tagge.idPost = Post.id;";
