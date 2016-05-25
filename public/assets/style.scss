@@ -1,0 +1,42 @@
+$red: #e74c3c;
+$grey: #323232;
+$clear_grey: #f3f3f3;
+$white: #ffffff;
+
+$title_font: 'Open Sans', sans-serif;
+
+html {
+  font-size: 67.5%;
+}
+
+body{
+	background-color: $clear_grey;
+}
+
+span, p, h1, h2, h3, h4, h5, h6{
+	font-family: $title_font;
+	font-weight: 400;
+}
+
+.title_rubrique{
+	text-transform: uppercase;
+	color: $red;
+	letter-spacing: 5px;
+	font-weight: 800;
+	font-size: 20px;
+}
+
+
+
+@media (max-width: 992px) {
+	header{
+		text-align: center;
+	}
+}
+
+@import 'meyer-reset',
+        'post',
+        'home'
+;
+
+

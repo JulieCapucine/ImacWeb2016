@@ -1,6 +1,14 @@
 <template>
-  <div id="app">
-    <h1>{{ msg }}</h1>
+  <div id="wrapper">
+    <header>
+      <!--<h2>Redbook</h2>-->
+      <img src="../assets/img/logo_small_trans.png">
+    </header><!-- /header -->
+    <router-view
+      keep-alive
+      transition
+      transition-mode="out-in">
+    </router-view>
   </div>
 </template>
 
