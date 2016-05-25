@@ -17,6 +17,7 @@
 
   export default {
     name: "ListView",
+    
     components: { PostComponent, CommentComponent },
     data () {
       return {
@@ -24,6 +25,7 @@
         posts: []
       }
     },
+
     route: {
       data ({ to }) {
         //to.params.id = topic_id

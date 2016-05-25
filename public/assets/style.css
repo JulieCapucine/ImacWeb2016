@@ -133,7 +133,15 @@ table {
     padding: 30px; }
 
   .post .date, .post .text {
-    margin: 5px 0px; } }
+    margin: 5px 0px; }
+
+  .post .title_post {
+    margin-top: 40px;
+    margin-bottom: 20px; }
+
+  .button_post {
+    margin: 0px 10px 20px 10px;
+    text-align: center; } }
 .topic-list {
   text-align: center; }
 
