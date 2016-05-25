@@ -42,6 +42,38 @@ $app->get('/post/{ids}/comments', function($request, $response, $args) {
   return $response->withJson($result);
 });
 
+$app->post('/post/{id_post}/comment/{id_comment}', function($request, $response, $args) {
+  try{
+    $body   = $request->getParsedBody();
+    $auteur = filter_var($body['auteur'], FILTER_SANITIZE_STRING);
+    $texte  = filter_var($body['contenu'], FILTER_SANITIZE_STRING);
+
+    $sql = "INSERT INTO Comments (`auteur`, `texte`, `post`, `reponse`) VALUES ('".$auteur."', '".$texte."', '".$args['id_post']."', '".$args['id_comment']."');";
+    $query = $this->db->query($sql);
+
+    $response->status = 200;
+  } catch (Exception $e){
+    $response->status = 400;
+  }
+  return $response->withJson(http_response_code());
+});
+
+$app->post('/post/{id}/comments', function($request, $response, $args) {
+  try{
+    $body   = $request->getParsedBody();
+    $auteur = filter_var($body['auteur'], FILTER_SANITIZE_STRING);
+    $texte  = filter_var($body['contenu'], FILTER_SANITIZE_STRING);
+
+    $sql = "INSERT INTO Comments (`auteur`, `texte`, `post`, `reponse`) VALUES ('".$auteur."', '".$texte."', '".$args['id']."');";
+    $query = $this->db->query($sql);
+
+    $response->status = 200;
+  } catch (Exception $e){
+    $response->status = 400;
+  }
+  return $response->withJson(http_response_code());
+});
+
 $app->get('/post/{id}', function($request, $response, $args) {
   $sql = "SELECT * FROM Post WHERE id = ".$args["id"].";";
   $query = $this->db->query($sql);
@@ -62,6 +94,7 @@ $app->get('/comments', function($request, $response, $args) {
   $result = $query->fetchAll();
   return $response->withJson($result);
 });
+
 
 $app->delete('/post/{id}', function($request, $response, $args) {
   $sql = "SELECT * FROM Post WHERE id = ".$args["id"].";";

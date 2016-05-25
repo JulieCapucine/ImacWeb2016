@@ -55,6 +55,16 @@
 			<input type="hidden" name="_METHOD" value="DELETE"/>
 			<input type="submit" value ="effacer"/>
 		</form>
+
+		<h1> Ajout decommentaire dans le topic 2 ♥ </h1>
+		<form method="POST" action="api/public/post/2/comment/2">
+			<label for="postAuteur">Auteur</label>
+			<input type="text" name="auteur" id="postAuteur"/>
+			<br/>
+			<label for="postTitre">Text</label>
+			<textarea name="contenu" id="postContenu"></textarea>
+			<input type="submit"/>
+		</form>
 	
 	</body>
 
