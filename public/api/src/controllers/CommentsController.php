@@ -26,6 +26,38 @@ class CommentsController {
 		return $response->withJson($result);
 	}
 
+	public function create($request, $response, $args){
+		try{
+   			$body   = $request->getParsedBody();
+		    $auteur = filter_var($body['auteur'], FILTER_SANITIZE_STRING);
+		    $texte  = filter_var($body['contenu'], FILTER_SANITIZE_STRING);
+
+		    $sql = "INSERT INTO Comments (`auteur`, `texte`, `post`, `reponse`) VALUES ('".$auteur."', '".$texte."', '".$args['id']."');";
+		    $query = $this->db->query($sql);
+
+		    $response->status = 200;
+		} catch (Exception $e){
+		    $response->status = 400;
+		}
+		return $response->withJson(http_response_code());
+	}
+
+	public function createReponse($request, $response, $args){
+		try{
+	  	 	$body   = $request->getParsedBody();
+		    $auteur = filter_var($body['auteur'], FILTER_SANITIZE_STRING);
+		    $texte  = filter_var($body['contenu'], FILTER_SANITIZE_STRING);
+
+		    $sql = "INSERT INTO Comments (`auteur`, `texte`, `post`, `reponse`) VALUES ('".$auteur."', '".$texte."', '".$args['id_post']."', '".$args['id_comment']."');";
+		    $query = $this->db->query($sql);
+
+		    $response->status = 200;
+		} catch (Exception $e){
+		    $response->status = 400;
+		}
+	  return $response->withJson(http_response_code());
+	}
+
 
 
 }
