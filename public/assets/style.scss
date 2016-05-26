@@ -1,37 +1,27 @@
 $red: #e74c3c;
 $grey: #323232;
+$white: #fff;
 $clear_grey: #f3f3f3;
-$white: #ffffff;
 
-$title_font: 'Open Sans', sans-serif;
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800);
+
+$title-font: 'Open Sans', sans-serif;
 
 html {
   font-size: 67.5%;
 }
-
-body{
-	background-color: $clear_grey;
+* {
+  font-family: $title-font;
 }
 
-span, p, h1, h2, h3, h4, h5, h6{
-	font-family: $title_font;
-	font-weight: 400;
+body {
+  background: $clear_grey;
 }
-
-.title_rubrique{
-	text-transform: uppercase;
-	color: $red;
-	letter-spacing: 5px;
-	font-weight: 800;
-	font-size: 20px;
-}
-
-
 
 @media (max-width: 992px) {
-	header{
-		text-align: center;
-	}
+  header{
+    text-align: center;
+  }
 }
 
 @import 'meyer-reset',

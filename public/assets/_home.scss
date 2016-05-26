@@ -1,3 +1,70 @@
+.home .info {
+  text-align: center;
+  margin-top:3rem;
+  h1 {
+    font-size: 4.8rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+  }
+  h2 {
+    font-size: 1.4rem;
+    margin: 0px 0px 3rem 0px;
+  }
+  img{
+    max-width:22rem;
+    width:100%;
+  }
+}
+
+.red {
+  color: $red;
+}
+
+.stats {
+  display: flex;
+  align-items: center;
+  color: #fff;  
+  background: $red;
+  padding: 1.2rem 0em;
+  text-align: center;
+  margin: 1rem 0rem;
+  span.number {
+    font-weight: 800;
+    display: block;
+    font-size: 3.6rem;
+  }
+  .col-sm-4{
+    margin: 2rem 0rem;
+
+  }
+}
+
+.topic-list_container{
+  text-align: center;
+  transition: 0.5s;
+  h2{
+    text-transform: uppercase;
+    font-weight: 800;
+    font-size: 1.2rem;
+    margin: 2.5em 0px;
+  }
+
+}
+
 .topic-list {
   text-align: center;
+  .topic-link {
+    letter-spacing: 0.1rem;
+    color: #000;
+    display: inline-block;
+    border: 1px solid $red;
+    width: 90%;
+    padding: 0.8rem;
+    border-radius: 2rem;
+    margin-bottom: 3rem;
+    &:hover {
+      background-color: $red;
+      color: #fff;
+    }
+  }
 }

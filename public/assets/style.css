@@ -1,19 +1,12 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800);
 html {
   font-size: 67.5%; }
 
+* {
+  font-family: "Open Sans", sans-serif; }
+
 body {
-  background-color: #f3f3f3; }
-
-span, p, h1, h2, h3, h4, h5, h6 {
-  font-family: "Open Sans", sans-serif;
-  font-weight: 400; }
-
-.title_rubrique {
-  text-transform: uppercase;
-  color: #e74c3c;
-  letter-spacing: 5px;
-  font-weight: 800;
-  font-size: 20px; }
+  background: #f3f3f3; }
 
 @media (max-width: 992px) {
   header {
@@ -51,14 +44,21 @@ table {
   border-spacing: 0; }
 
 .post {
-  background-color: #ffffff;
+  background-color: #fff;
   clear: both;
   overflow: hidden;
-  margin: 50px 0px; }
+  margin-bottom: 2rem; }
 
 .header_rubrique {
   margin: 30px 10px;
   text-align: center; }
+
+.title_rubrique {
+  text-transform: uppercase;
+  color: #e74c3c;
+  letter-spacing: 5px;
+  font-weight: 800;
+  font-size: 20px; }
 
 .post .title_post {
   margin-top: 40px;
@@ -71,20 +71,23 @@ table {
   text-transform: uppercase; }
 
 .post .img {
-  height: 100%; }
+  height: 100%;
+  box-sizing: border-box;
+  padding: 0rem; }
 
 .post img {
-  padding: 10px;
   width: 100%;
   float: left;
-  display: block; }
+  display: block;
+  box-sizing: border-box;
+  padding: 2rem; }
 
 .button_post {
   margin: 10px 10px 30px 10px;
   text-align: center; }
 
 .button_post button {
-  background-color: #ffffff;
+  background-color: #fff;
   text-align: center;
   border-radius: 50px;
   border: 1px solid #e74c3c;
@@ -93,14 +96,14 @@ table {
 
 .button_post button:hover {
   background-color: #e74c3c;
-  color: #ffffff; }
+  color: #fff; }
 
 .button_post button span {
   color: #e74c3c;
   font-size: 18px; }
 
 .button_post button:hover span {
-  color: #ffffff;
+  color: #fff;
   font-size: 18px; }
 
 .post .text {
@@ -108,7 +111,7 @@ table {
   letter-spacing: 1px; }
 
 .post .date, .post .text {
-  margin: 20px 0px; }
+  margin: 1.2em 0px; }
 
 .post .date span {
   color: #e74c3c;
@@ -116,7 +119,7 @@ table {
   font-weight: 300; }
 
 .post .info {
-  padding: 10px; }
+  padding: 0rem 2.6rem; }
 
 .post .nb_likes {
   background-color: #f3f3f3;
@@ -133,16 +136,61 @@ table {
     padding: 30px; }
 
   .post .date, .post .text {
-    margin: 5px 0px; }
+    margin: 5px 0px; } }
+.home .info {
+  text-align: center;
+  margin-top: 3rem; }
+  .home .info h1 {
+    font-size: 4.8rem;
+    font-weight: 800;
+    letter-spacing: 0.1em; }
+  .home .info h2 {
+    font-size: 1.4rem;
+    margin: 0px 0px 3rem 0px; }
+  .home .info img {
+    max-width: 22rem;
+    width: 100%; }
 
-  .post .title_post {
-    margin-top: 40px;
-    margin-bottom: 20px; }
+.red {
+  color: #e74c3c; }
 
-  .button_post {
-    margin: 0px 10px 20px 10px;
-    text-align: center; } }
+.stats {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  background: #e74c3c;
+  padding: 1.2rem 0em;
+  text-align: center;
+  margin: 1rem 0rem; }
+  .stats span.number {
+    font-weight: 800;
+    display: block;
+    font-size: 3.6rem; }
+  .stats .col-sm-4 {
+    margin: 2rem 0rem; }
+
+.topic-list_container {
+  text-align: center;
+  transition: 0.5s; }
+  .topic-list_container h2 {
+    text-transform: uppercase;
+    font-weight: 800;
+    font-size: 1.2rem;
+    margin: 2.5em 0px; }
+
 .topic-list {
   text-align: center; }
+  .topic-list .topic-link {
+    letter-spacing: 0.1rem;
+    color: #000;
+    display: inline-block;
+    border: 1px solid #e74c3c;
+    width: 90%;
+    padding: 0.8rem;
+    border-radius: 2rem;
+    margin-bottom: 3rem; }
+    .topic-list .topic-link:hover {
+      background-color: #e74c3c;
+      color: #fff; }
 
 /*# sourceMappingURL=style.css.map */
