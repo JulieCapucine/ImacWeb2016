@@ -25,7 +25,7 @@
   align-items: center;
   color: #fff;  
   background: $red;
-  padding: 1.2rem 0em;
+  padding: 0.8rem 0em;
   text-align: center;
   margin: 1rem 0rem;
   span.number {
@@ -35,24 +35,28 @@
   }
   .col-sm-4{
     margin: 2rem 0rem;
-
   }
 }
 
 .topic-list_container{
   text-align: center;
-  transition: 0.5s;
   h2{
     text-transform: uppercase;
     font-weight: 800;
     font-size: 1.2rem;
     margin: 2.5em 0px;
   }
+}
 
+.topic-list a{
+  text-decoration: none;
+  transition: 0.1s;
+  -webkit-transition: 0.1s;
 }
 
 .topic-list {
   text-align: center;
+
   .topic-link {
     letter-spacing: 0.1rem;
     color: #000;

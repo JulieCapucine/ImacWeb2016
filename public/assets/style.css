@@ -83,10 +83,13 @@ table {
   padding: 2rem; }
 
 .button_post {
-  margin: 10px 10px 30px 10px;
+  margin: 20px 10px 30px 10px;
   text-align: center; }
 
 .button_post button {
+  text-decoration: none;
+  transition: 0.1s;
+  -webkit-transition: 0.1s;
   background-color: #fff;
   text-align: center;
   border-radius: 50px;
@@ -136,7 +139,11 @@ table {
     padding: 30px; }
 
   .post .date, .post .text {
-    margin: 5px 0px; } }
+    margin: 5px 0px; }
+
+  .button_post {
+    margin: 0px 10px 30px 10px;
+    text-align: center; } }
 .home .info {
   text-align: center;
   margin-top: 3rem; }
@@ -159,7 +166,7 @@ table {
   align-items: center;
   color: #fff;
   background: #e74c3c;
-  padding: 1.2rem 0em;
+  padding: 0.8rem 0em;
   text-align: center;
   margin: 1rem 0rem; }
   .stats span.number {
@@ -170,13 +177,17 @@ table {
     margin: 2rem 0rem; }
 
 .topic-list_container {
-  text-align: center;
-  transition: 0.5s; }
+  text-align: center; }
   .topic-list_container h2 {
     text-transform: uppercase;
     font-weight: 800;
     font-size: 1.2rem;
     margin: 2.5em 0px; }
+
+.topic-list a {
+  text-decoration: none;
+  transition: 0.1s;
+  -webkit-transition: 0.1s; }
 
 .topic-list {
   text-align: center; }

@@ -46,11 +46,14 @@
 }
 
 .button_post{
-  margin: 10px 10px 30px 10px;
+  margin: 20px 10px 30px 10px;
   text-align: center;
 }
 
 .button_post button{
+  text-decoration: none;
+  transition: 0.1s;
+  -webkit-transition: 0.1s;
   background-color: $white;
   text-align: center;
   border-radius: 50px;
@@ -114,4 +117,8 @@
     margin: 5px 0px;
   }
 
+  .button_post{
+      margin: 0px 10px 30px 10px;
+      text-align: center;
+    }
 }
