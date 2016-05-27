@@ -1,15 +1,15 @@
 <template>
-  <div class="comment">
+  <div class="comment col-sm-11 col-sm-offset-1">
     <div class="info">
-      <span class="date"></span>
-      <span class="author"></span>
+      <span class="date">Publié le {{ comment.date }} par </span>
+      <span class="author">{{ comment.auteur }}</span>
     </div>
     <div class="text">
-      
+      {{ comment.texte }}
     </div>
 
-    <div class="sub-comments">
-      
+    <div class="sub-comments col-sm-10 col-sm-offset-2">
+      <comment-component v-for='childComment in childComments' :comment='childComment' v-show="childComments != []">
     </div>
 
   </div>
@@ -26,11 +26,17 @@
         childComments: []
       }
     },
-    created () {
-      if (this.comment.childComments) {
-        let ids = _.map(this.comment.childComments, _.property('id'))
-
-      }
+    ready () {
+      console.log(this.comment)
+      //let ids = _.map(this.comment.childComments, _.property('id'))
+      this.$http.get('comment/' + this.comment.id).then(
+        (response) => {
+          this.childComments = response.data
+        },
+        (response) => {
+          console.log("fetching subcomments failed")
+        }
+      )
     }
   }
 </script>

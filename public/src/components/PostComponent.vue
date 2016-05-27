@@ -16,6 +16,11 @@
             {{ post.likes }} likes
           </span>
         </div>
+        <div class="list_tags">
+          <div class="tag" v-for="tag in tags">
+            <span>#{{ tag.nom }}</span>
+          </div>
+        </div>
       </div>
     </div>
     <div class="row">
@@ -37,7 +42,8 @@
   export default {
     name: "PostComponent",
     props: {
-      post: Object
+      post: Object,
+      tags: Array
     },
     data () {
       return {

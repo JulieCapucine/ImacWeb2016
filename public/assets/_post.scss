@@ -6,9 +6,21 @@
   margin-bottom: 2rem;
 }
 
+.post-list h1, .post-view h1 {
+  font-weight: 800;
+  font-size: 4.0rem;
+}
+
 .header_rubrique{
   margin: 30px 10px;
   text-align: center;
+
+  h1, h3{
+    margin:30px 0px;
+  }
+  h3{
+    font-weight: 400;
+  }
 }
 
 .title_rubrique{
@@ -102,15 +114,101 @@
   border-radius: 5px;
   font-size: 12px;
   letter-spacing: 2px;
+  margin:10px 0px;
   color: $red;
   display: inline-block;
+}
+
+.tag{
+  text-decoration: none;
+  transition: 0.1s;
+  -webkit-transition: 0.1s;
+  background-color: transparent;
+  text-align: center;
+  border-radius: 50px;
+  border: 1px solid $red;
+  padding:10px 40px;
+  display: inline-block;
+  margin:10px;
+
+  span{
+    color: $red;
+  }
+
+}
+
+.post-view {
+  .post {
+    background: transparent;
+
+    .text {
+      box-sizing: border-box;
+      padding-top: 2.6rem;
+      margin: 0;
+    }
+
+    .img {
+      padding: 0;
+      /*padding-top: 2.6rem;*/
+    }
+  }
+
+  .comments{
+    .title_rubrique_com{
+      font-size: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 800;
+      padding:20px;
+    }
+
+    .line{
+      height:1px;
+      background-color: $red;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+  }
+
+  .comment{
+    margin: 2rem;
+    background-color: $white;
+    padding:1.5rem;
+
+    .info{
+      margin-bottom: 15px;
+    }
+
+    .date{
+      color: $red;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .author{
+      color: $red;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .text{
+      line-height: 25px;
+      letter-spacing: 1px;
+      font-size: 1rem;
+    }
+  }
+
+  .sub-comments {
+    margin-left: 5rem;
+  }
 }
 
 @media (max-width: 992px) {
 
   .post .info{
     text-align: center;
-    padding: 30px;
+    padding: 0px 30px 30px 30px;
   }
 
   .post .date, .post .text{

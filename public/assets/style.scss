@@ -3,13 +3,14 @@ $grey: #323232;
 $white: #fff;
 $clear_grey: #f3f3f3;
 
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800);
+@import url(//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800);
 
 $title-font: 'Open Sans', sans-serif;
 
 html {
   font-size: 67.5%;
 }
+
 * {
   font-family: $title-font;
 }
@@ -19,13 +20,19 @@ body {
 }
 
 @media (max-width: 992px) {
+
   header{
     text-align: center;
   }
+
+  html {
+	  font-size: 50%;
+	}
 }
 
 @import 'meyer-reset',
         'post',
+        'comment',
         'home'
 ;
 

@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800);
+@import url(//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800);
 html {
   font-size: 67.5%; }
 
@@ -10,7 +10,10 @@ body {
 
 @media (max-width: 992px) {
   header {
-    text-align: center; } }
+    text-align: center; }
+
+  html {
+    font-size: 50%; } }
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
   margin: 0;
   padding: 0;
@@ -49,9 +52,17 @@ table {
   overflow: hidden;
   margin-bottom: 2rem; }
 
+.post-list h1, .post-view h1 {
+  font-weight: 800;
+  font-size: 4.0rem; }
+
 .header_rubrique {
   margin: 30px 10px;
   text-align: center; }
+  .header_rubrique h1, .header_rubrique h3 {
+    margin: 30px 0px; }
+  .header_rubrique h3 {
+    font-weight: 400; }
 
 .title_rubrique {
   text-transform: uppercase;
@@ -130,13 +141,70 @@ table {
   border-radius: 5px;
   font-size: 12px;
   letter-spacing: 2px;
+  margin: 10px 0px;
   color: #e74c3c;
   display: inline-block; }
+
+.tag {
+  text-decoration: none;
+  transition: 0.1s;
+  -webkit-transition: 0.1s;
+  background-color: transparent;
+  text-align: center;
+  border-radius: 50px;
+  border: 1px solid #e74c3c;
+  padding: 10px 40px;
+  display: inline-block;
+  margin: 10px; }
+  .tag span {
+    color: #e74c3c; }
+
+.post-view .post {
+  background: transparent; }
+  .post-view .post .text {
+    box-sizing: border-box;
+    padding-top: 2.6rem;
+    margin: 0; }
+  .post-view .post .img {
+    padding: 0;
+    /*padding-top: 2.6rem;*/ }
+.post-view .comments .title_rubrique_com {
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 800;
+  padding: 20px; }
+.post-view .comments .line {
+  height: 1px;
+  background-color: #e74c3c;
+  width: 100%;
+  margin-bottom: 20px; }
+.post-view .comment {
+  margin: 2rem;
+  background-color: #fff;
+  padding: 1.5rem; }
+  .post-view .comment .info {
+    margin-bottom: 15px; }
+  .post-view .comment .date {
+    color: #e74c3c;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 1px; }
+  .post-view .comment .author {
+    color: #e74c3c;
+    font-weight: 600;
+    text-transform: uppercase; }
+  .post-view .comment .text {
+    line-height: 25px;
+    letter-spacing: 1px;
+    font-size: 1rem; }
+.post-view .sub-comments {
+  margin-left: 5rem; }
 
 @media (max-width: 992px) {
   .post .info {
     text-align: center;
-    padding: 30px; }
+    padding: 0px 30px 30px 30px; }
 
   .post .date, .post .text {
     margin: 5px 0px; }
